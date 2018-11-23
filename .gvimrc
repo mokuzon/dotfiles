@@ -1,4 +1,4 @@
-set guifont=Inconsolata\ for\ Powerline:h13
+set guifont=Inconsolata:h11
 set enc=utf8
 
 colorscheme hybrid
@@ -51,22 +51,8 @@ set lines=160 columns=280
 set macmeta
 set imdisable
 
-" let $PYTHONHOME=$HOME."/.pyenv/versions/2.7.15"
-" set pythondll=$HOME/.pyenv/versions/2.7.15/lib/libpython2.7.dylib
-" py import sys
-let $PYTHONHOME=$HOME."/.pyenv/versions/3.6.5"
-set pythonthreedll=$HOME/.pyenv/versions/3.6.5/lib/libpython3.6m.dylib
-py3 import sys
-let $RUBYHOME=$HOME."/.rbenv/versions/2.5.1"
-set rubydll=$HOME/.rbenv/versions/2.5.1/lib/libruby.2.5.1.dylib
+" let g:pymode_python = 'python3'
+" let g:pymode_rope = 0
+" set pyxversion=3
 
 set imdisable
-
-noremap ; :
-noremap : ;
-inoremap ; :
-inoremap : ;
-vnoremap ; :
-vnoremap : ;
-cnoremap ; :
-cnoremap : ;

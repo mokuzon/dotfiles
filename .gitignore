@@ -1,3 +1,5 @@
+*.zwc
+
 /.tmux/plugins/*
 !/.tmux/plugins/tpm
 /.tmux/resurrect
@@ -7,7 +9,7 @@
 /.vim/cache
 /.viminfo
 
-/.zsh/local.zsh
+/.zshenv
 /.vim/my_autoload/local.vim
 
 !.gitkeep
