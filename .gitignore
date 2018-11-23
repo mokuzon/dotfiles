@@ -1,0 +1,13 @@
+/.tmux/plugins/*
+!/.tmux/plugins/tpm
+/.tmux/resurrect
+
+/.vim/plugged/*
+/.vim/tmp/*
+/.vim/cache
+/.viminfo
+
+/.zsh/local.zsh
+/.vim/my_autoload/local.vim
+
+!.gitkeep
