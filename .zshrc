@@ -166,14 +166,14 @@ bindkey '^xs' peco-select-tmux-session
 ######################################################################
 ### tmux
 ######################################################################
-# if [[ ! -n $TMUX ]]; then
-#   ID="`tmux list-sessions`"
-#   if [[ -z "$ID" ]]; then
-#     tmux new-session
-#   fi
-#   ID="`echo $ID | peco | cut -d: -f1`"
-#   tmux attach-session -t "$ID"
-# fi
+if [[ ! -n $TMUX ]]; then
+  ID="`tmux list-sessions`"
+  if [[ -z "$ID" ]]; then
+    tmux new-session
+  fi
+  ID="`echo $ID | peco | cut -d: -f1`"
+  tmux attach-session -t "$ID"
+fi
 
 autoload -Uz add-zsh-hook
 function rename_tmux_window() {
@@ -205,3 +205,5 @@ precmd () { vcs_info }
 PROMPT='%B
 ${cdir}${vcs_info_msg_0_} %F{238}[%*]%f
 %(?.%F{green}.%F{yellow})%(?.${success}.${fail})%f $ %b'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

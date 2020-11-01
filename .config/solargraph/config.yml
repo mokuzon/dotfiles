@@ -1,0 +1,24 @@
+---
+include:
+- "**/*.rb"
+exclude:
+- spec/**/*
+- test/**/*
+- vendor/**/*
+require: # https://github.com/castwide/solargraph/issues/87
+- actioncable
+- actionmailer
+- actionpack
+- actionview
+- activejob
+- activemodel
+- activerecord
+- activestorage
+- activesupport
+domains: []
+reporters:
+- rubocop
+- require_not_found
+require_paths: []
+plugins: []
+max_files: 5000

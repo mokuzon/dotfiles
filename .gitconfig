@@ -31,5 +31,3 @@
   oi = "!hub browse -- issues/$(git rev-parse --abbrev-ref HEAD | awk -F "-" '{print $2}')"
   cpr = "!git push origin $(git rev-parse --abbrev-ref HEAD) -f && hub pull-request -m \"issue: #$(git rev-parse --abbrev-ref HEAD | awk -F '-' '{print $2}')\" --edit"
   opr = "!hub browse -- pull/$(git rev-parse --abbrev-ref HEAD)"
-[init]
-	templatedir = ~/.git_template
