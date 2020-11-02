@@ -1,5 +1,4 @@
 [core]
-  editor = nvim -u ~/.vim/git.vim
   excludesfile = ~/.gitignore_global
 [user]
   name = Motoi Okuzono
