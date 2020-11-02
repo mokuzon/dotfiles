@@ -63,11 +63,6 @@ init() {
     $PACKAGE_MANAGER install -y peco
   fi
 
-  # peco install
-  if ! type fzf >/dev/null 2>&1; then
-    $PACKAGE_MANAGER install -y fzf
-  fi
-
   if [ -e $DOT_PATH/.git ]; then
     cd $DOT_PATH
     git pull

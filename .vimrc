@@ -5,6 +5,7 @@ set hidden
 set mouse=a
 set modifiable
 set noswapfile
+set autoread
 
 " tab
 filetype plugin indent on
@@ -25,7 +26,6 @@ set runtimepath+=~/.vim/bundle/repos/github.com/Shougo/dein.vim
 if dein#load_state('~/.vim/bundle')
   call dein#begin('~/.vim/bundle')
   call dein#add('~/.vim/bundle/repos/github.com/Shougo/dein.vim')
-  call dein#add('wsdjeg/dein-ui.vim')
 
   call dein#add('w0ng/vim-hybrid') " color scheme
   call dein#add('itchyny/lightline.vim')  " upgrade status bar
