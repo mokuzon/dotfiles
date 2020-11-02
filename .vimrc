@@ -46,6 +46,7 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('antoinemadec/coc-fzf', { 'build': 'yarn install --frozen-lockfile' })
 
   " Utility
+  call dein#add('junegunn/fzf', { 'build': './install --all' })
   call dein#add('junegunn/fzf.vim')
   call dein#add('907th/vim-auto-save') " auto save
   call dein#add('tomtom/tcomment_vim')  " comment out

@@ -32,6 +32,7 @@ export GOPATH=$HOME/.go
 export TERM=xterm-256color
 export GHQ_ROOT=$HOME/ghq
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
+export FZF_DEFAULT_OPTS='--reverse'
 export PATH=$GOPATH/bin:$PATH
 export PATH=/opt/brew/bin:$PATH
 
@@ -50,6 +51,7 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "mollifier/anyframe"
 
 zplug load --verbose 1>/dev/null 2>&1
+zstyle ":anyframe:selector:" use fzf
 
 
 ######################################################################
@@ -81,31 +83,9 @@ eval "$(direnv hook zsh)"
 ######################################################################
 ### functions
 ######################################################################
-function git-hash(){
-  local current_buffer=$BUFFER
-  local selected="$(git log --oneline --branches | peco | awk '{print $1}')"
-  if [ -n "$selected" ]; then
-    BUFFER="${current_buffer}${selected}"
-    CURSOR=$#BUFFER
-  fi
-  zle clear-screen
-}
-zle -N git-hash
-
-function git-stash(){
-  local current_buffer=$BUFFER
-  local selected="$(git stash list | peco | awk '{print $1}' | sed -e 's/://g')"
-  if [ -n "$selected" ]; then
-    BUFFER="${current_buffer}${selected}"
-    CURSOR=$#BUFFER
-  fi
-  zle clear-screen
-}
-zle -N git-stash
-
 function git-changed(){
   local current_buffer=$BUFFER
-  local selected="$(git status --short | peco | awk '{print $2}')"
+  local selected="$(git status --short | awk '{print $2}' | fzf --preview "bat --style=numbers --color=always --line-range :500 {}")"
   if [ -n "$selected" ]; then
     BUFFER="${current_buffer}${selected}"
     CURSOR=$#BUFFER
@@ -114,19 +94,9 @@ function git-changed(){
 }
 zle -N git-changed
 
-function ghq-cd () {
-  local selected=$(find $GHQ_ROOT -maxdepth 3 -mindepth 3 | sed -e "s#$GHQ_ROOT/##g" | peco --query "$LBUFFER")
-  if [ -n "$selected" ]; then
-    BUFFER="cd $GHQ_ROOT/$selected"
-    zle accept-line
-  fi
-  zle clear-screen
-}
-zle -N ghq-cd
-
 function file-search(){
   local current_buffer=$BUFFER
-  local selected="$(find . -maxdepth 10 | peco)"
+  local selected="$(find . -maxdepth 10 | fzf --preview "bat --style=numbers --color=always --line-range :500 {}")"
   if [ -n "$selected" ]; then
     BUFFER="${current_buffer}${selected}"
     CURSOR=$#BUFFER
@@ -135,14 +105,14 @@ function file-search(){
 }
 zle -N file-search
 
-function peco-select-tmux-session(){
+function select-tmux-session(){
   if [ -n "$TMUX" ]; then
-     local SELECTED="$(tmux list-sessions | peco | cut -d : -f 1)"
+     local SELECTED="$(tmux list-sessions | fzf | cut -d : -f 1)"
      tmux switch-client -t $SELECTED
      return 0
    fi
 }
-zle -N peco-select-tmux-session
+zle -N select-tmux-session
 
 
 ######################################################################
@@ -154,13 +124,10 @@ bindkey -e
 bindkey '^xr' anyframe-widget-put-history
 bindkey '^xb' anyframe-widget-checkout-git-branch
 bindkey '^xe' anyframe-widget-insert-git-branch
-
-bindkey '^xw' git-changed
-bindkey '^xc' git-hash
-bindkey '^xl' git-stash
-bindkey '^xg' ghq-cd
+bindkey '^xg' anyframe-widget-cd-ghq-repository
 bindkey '^xf' file-search
-bindkey '^xs' peco-select-tmux-session
+bindkey '^xw' git-changed
+bindkey '^xs' select-tmux-session
 
 
 ######################################################################
@@ -205,5 +172,3 @@ precmd () { vcs_info }
 PROMPT='%B
 ${cdir}${vcs_info_msg_0_} %F{238}[%*]%f
 %(?.%F{green}.%F{yellow})%(?.${success}.${fail})%f $ %b'
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
