@@ -1,9 +1,9 @@
-[submodule ".vim/vim-plug"]
-	path = .vim/vim-plug
-	url = https://github.com/junegunn/vim-plug.git
 [submodule ".zsh/zplug"]
 	path = .zsh/zplug
 	url = https://github.com/zplug/zplug.git
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule ".vim/bundle/repos/github.com/Shougo/dein.vim"]
+	path = .vim/bundle/repos/github.com/Shougo/dein.vim
+	url = https://github.com/Shougo/dein.vim
