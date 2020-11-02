@@ -1,11 +1,10 @@
 lan en_US.UTF-8
 set backupdir=~/.vim/tmp
-set belloff=all " no beep
-set hidden " move to another file before saving
-set mouse=a " enable mouse support
-set modifiable " enable window resize
+set belloff=all
+set hidden
+set mouse=a
+set modifiable
 set noswapfile
-set ttimeoutlen=10 " avoid mode change lag
 
 " tab
 filetype plugin indent on
@@ -40,6 +39,7 @@ Plug 'neoclide/coc-prettier', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-solargraph', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-html', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'neoclide/coc-css', { 'do': 'yarn install --frozen-lockfile' }
+Plug 'neoclide/coc-tabnine', { 'do': 'yarn install --frozen-lockfile' }
 Plug 'antoinemadec/coc-fzf', { 'do': 'yarn install --frozen-lockfile' }
 
 " Utility
@@ -74,8 +74,11 @@ if g:plug.is_installed('fzf.vim')
   let $FZF_DEFAULT_OPTS='--extended --layout=reverse --cycle'
   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow'
 
+  noremap <silent> fb :Buffers<CR>
   noremap <silent> ff :Files<CR>
-  noremap <silent> fg :Rg <C-R><C-W><CR>
+  noremap <silent> fg :GFiles?<CR>
+  noremap <silent> fh :History<CR>
+  noremap <silent> fr :Rg <C-R><C-W><CR>
 endif
 
 if g:plug.is_installed('vim-auto-save')
@@ -200,13 +203,6 @@ if g:plug.is_installed('lightline.vim')
      \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
      \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
   endfunction
-endif
-
-let g:vim_json_syntax_conceal = 0
-
-"" keybind
-if &diff
-  cnoremap q qa
 endif
 
 noremap <C-t> <Nop> " for tmux

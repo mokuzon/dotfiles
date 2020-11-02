@@ -6,5 +6,16 @@
     "typescript",
     "typescriptreact"
   ],
-  "solargraph.diagnostics": true
+  "solargraph.diagnostics": true,
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": [
+        "terraform",
+        "tf"
+      ],
+      "initializationOptions": {},
+      "settings": {}
+    }
+  }
 }
