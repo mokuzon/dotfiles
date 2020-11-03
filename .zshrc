@@ -49,6 +49,7 @@ source $ZPLUG_HOME/init.zsh
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "mollifier/anyframe"
+zplug "zsh-users/zsh-completions"
 
 zplug load --verbose 1>/dev/null 2>&1
 zstyle ":anyframe:selector:" use fzf
@@ -96,7 +97,7 @@ zle -N git-changed
 
 function file-search(){
   local current_buffer=$BUFFER
-  local selected="$(find . -maxdepth 10 | fzf --preview "bat --style=numbers --color=always --line-range :500 {}")"
+  local selected="$(find . -type f -maxdepth 10 | fzf --preview "bat --style=numbers --color=always --line-range :500 {}")"
   if [ -n "$selected" ]; then
     BUFFER="${current_buffer}${selected}"
     CURSOR=$#BUFFER

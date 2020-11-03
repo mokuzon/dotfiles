@@ -57,6 +57,9 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('tpope/vim-rhubarb')
   call dein#add('airblade/vim-gitgutter')
 
+  " Ruby
+  call dein#add('tpope/vim-endwise')
+
   " Terraform
   call dein#add('fatih/vim-hclfmt')
 
