@@ -59,9 +59,11 @@ if dein#load_state('~/.vim/bundle')
 
   " Ruby
   call dein#add('tpope/vim-endwise')
+  call dein#add('rlue/vim-fold-rspec')
+  call dein#add('tpope/vim-rails')
 
-  " Terraform
-  call dein#add('fatih/vim-hclfmt')
+  " Jsonnet
+  call dein#add('google/vim-jsonnet')
 
   call dein#end()
   call dein#save_state()
@@ -84,6 +86,11 @@ let g:auto_save_events = ['InsertLeave', 'CursorHold']
 set updatetime=100
 
 nnoremap <A-n> :NERDTreeToggle<CR>
+
+let g:fold_rspec_foldenable = 0
+let g:fold_rspec_foldclose = 'all'
+let g:fold_rspec_foldminlines = 2
+let g:fold_rspec_foldlevel = 2
 
 "" filetypes
 au BufRead,BufNewFile *.jsx set filetype=javascript.jsx
@@ -127,6 +134,65 @@ hi BufTabLineHidden ctermfg=231 ctermbg=238
 hi BufTabLineFill ctermbg=237
 
 set laststatus=2
+
+hi NERDTreeDir ctermfg=110
+hi NERDTreeUp ctermfg=9
+hi NERDTreeDirSlash ctermfg=110
+hi NERDTReeCWD ctermfg=14
+
+let g:NERDTreeIndicatorMapCustom = {
+  \ "Modified"  : "!",
+  \ "Staged"    : "+",
+  \ "Untracked" : "N",
+  \ "Renamed"   : "R",
+  \ "Unmerged"  : "═",
+  \ "Deleted"   : "D",
+  \ "Dirty"     : "✗",
+  \ "Clean"     : "✔︎",
+  \ "Unknown"   : "?"
+\ }
+
+let NERDTreeShowHidden = 1  " show hidden files
+let NERDTreeWinSize = 45
+
+let g:NERDTreeMapJumpNextSibling = ''
+
+fun! IsNERDTreeOpen()
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfun
+
+fun! MyNERDTreeToggle()
+  if IsNERDTreeOpen()
+    NERDTreeClose
+  elseif strlen(expand('%')) > 0
+    NERDTreeFind
+    wincmd p
+  else
+    NERDTreeToggle
+    wincmd p
+  endif
+endfun
+autocmd VimEnter * call MyNERDTreeToggle()
+
+fun! MyNERDTreeFocus()
+  if IsNERDTreeOpen()
+    if index(['help', 'nerdtree', 'tagbar', 'denite', 'denite-filter'], &ft) <= 0
+      NERDTreeFind
+      wincmd p
+    endif
+  endif
+endfun
+
+autocmd BufWinEnter * call MyNERDTreeFocus()
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+set autoread
+augroup checktime
+  au!
+  autocmd BufEnter        * silent! checktime
+  autocmd CursorHold      * silent! checktime
+  autocmd CursorHoldI     * silent! checktime
+augroup END
 
 let g:lightline = {
 \ 'active': {
@@ -190,7 +256,10 @@ function! LightLineFilename()
    \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
+"" keymap
 noremap <C-t> <Nop> " for tmux
+
+imap <CR> <C-R>=pumvisible() && complete_info()['selected'] != -1 ? '<C-y>' : "\n"<CR>
 
 nnoremap <M-p> :call Openpr()<CR>
 nnoremap <M-g> :Gbrowse master:%<CR>
@@ -202,7 +271,8 @@ nnoremap # #zz
 " buffer
 nnoremap <S-k> :bn<CR>
 nnoremap <S-j> :bp<CR>
-nnoremap <S-x> :bw<CR>
+nnoremap <S-x> :bp<CR>:bd #<CR>
+
 
 inoremap <C-u> <C-g>u<C-u>
 inoremap <C-w> <C-g>u<C-w>
@@ -243,5 +313,5 @@ nnoremap P "*p
 
 inoremap <silent> jj <ESC>
 
-" locad local rc
+"" locad local rc
 runtime! local.vim

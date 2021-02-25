@@ -58,7 +58,10 @@ zstyle ":anyframe:selector:" use fzf
 ######################################################################
 ### alias
 ######################################################################
-alias ls='ls -G'
+alias ls='exa'
+alias cat='bat'
+alias find='fd'
+alias ps='procs'
 alias tmux='tmux -2'
 alias gs='git status --short'
 alias ts='tig status'
@@ -97,7 +100,7 @@ zle -N git-changed
 
 function file-search(){
   local current_buffer=$BUFFER
-  local selected="$(find . -type f -maxdepth 10 | fzf --preview "bat --style=numbers --color=always --line-range :500 {}")"
+  local selected="$(fd . --type f -d 10 | fzf --preview "bat --style=numbers --color=always --line-range :500 {}")"
   if [ -n "$selected" ]; then
     BUFFER="${current_buffer}${selected}"
     CURSOR=$#BUFFER
@@ -105,15 +108,6 @@ function file-search(){
   zle clear-screen
 }
 zle -N file-search
-
-function select-tmux-session(){
-  if [ -n "$TMUX" ]; then
-     local SELECTED="$(tmux list-sessions | fzf | cut -d : -f 1)"
-     tmux switch-client -t $SELECTED
-     return 0
-   fi
-}
-zle -N select-tmux-session
 
 
 ######################################################################
@@ -128,7 +122,6 @@ bindkey '^xe' anyframe-widget-insert-git-branch
 bindkey '^xg' anyframe-widget-cd-ghq-repository
 bindkey '^xf' file-search
 bindkey '^xw' git-changed
-bindkey '^xs' select-tmux-session
 
 
 ######################################################################
@@ -173,3 +166,5 @@ precmd () { vcs_info }
 PROMPT='%B
 ${cdir}${vcs_info_msg_0_} %F{238}[%*]%f
 %(?.%F{green}.%F{yellow})%(?.${success}.${fail})%f $ %b'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
