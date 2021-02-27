@@ -33,6 +33,7 @@ export TERM=xterm-256color
 export GHQ_ROOT=$HOME/ghq
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
 export FZF_DEFAULT_OPTS='--reverse'
+export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
 export PATH=$GOPATH/bin:$PATH
 export PATH=/opt/brew/bin:$PATH
 
