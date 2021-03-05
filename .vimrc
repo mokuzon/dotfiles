@@ -61,6 +61,7 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('tpope/vim-endwise')
   call dein#add('rlue/vim-fold-rspec')
   call dein#add('tpope/vim-rails')
+  call dein#add('vim-scripts/ruby-matchit')
 
   " Jsonnet
   call dein#add('google/vim-jsonnet')
