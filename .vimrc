@@ -28,6 +28,7 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('~/.vim/bundle/repos/github.com/Shougo/dein.vim')
 
   call dein#add('w0ng/vim-hybrid') " color scheme
+  call dein#add('luochen1990/rainbow') " highliht pair branckets
   call dein#add('itchyny/lightline.vim')  " upgrade status bar
   call dein#add('cocopon/lightline-hybrid.vim') "status bar color scheme
   call dein#add('Yggdroot/indentLine') " indent guide
@@ -256,6 +257,8 @@ function! LightLineFilename()
    \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
    \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
+
+let g:rainbow_active = 1
 
 "" keymap
 noremap <C-t> <Nop> " for tmux
