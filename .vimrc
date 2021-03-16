@@ -87,8 +87,6 @@ let g:auto_save_silent = 1
 let g:auto_save_events = ['InsertLeave', 'CursorHold']
 set updatetime=100
 
-nnoremap <A-n> :NERDTreeToggle<CR>
-
 let g:fold_rspec_foldenable = 0
 let g:fold_rspec_foldclose = 'all'
 let g:fold_rspec_foldminlines = 2
@@ -156,37 +154,7 @@ let g:NERDTreeIndicatorMapCustom = {
 
 let NERDTreeShowHidden = 1  " show hidden files
 let NERDTreeWinSize = 45
-
 let g:NERDTreeMapJumpNextSibling = ''
-
-fun! IsNERDTreeOpen()
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfun
-
-fun! MyNERDTreeToggle()
-  if IsNERDTreeOpen()
-    NERDTreeClose
-  elseif strlen(expand('%')) > 0
-    NERDTreeFind
-    wincmd p
-  else
-    NERDTreeToggle
-    wincmd p
-  endif
-endfun
-autocmd VimEnter * call MyNERDTreeToggle()
-
-fun! MyNERDTreeFocus()
-  if IsNERDTreeOpen()
-    if index(['help', 'nerdtree', 'tagbar', 'denite', 'denite-filter'], &ft) <= 0
-      NERDTreeFind
-      wincmd p
-    endif
-  endif
-endfun
-
-autocmd BufWinEnter * call MyNERDTreeFocus()
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 set autoread
 augroup checktime
@@ -266,6 +234,8 @@ imap <CR> <C-R>=pumvisible() && complete_info()['selected'] != -1 ? '<C-y>' : "\
 
 nnoremap <M-p> :call Openpr()<CR>
 nnoremap <M-g> :Gbrowse master:%<CR>
+nnoremap <M-n> :NERDTreeToggle<CR>
+
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap * *zz
