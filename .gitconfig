@@ -1,0 +1,34 @@
+[core]
+  excludesfile = ~/.gitignore_global
+[user]
+  name = Motoi Okuzono
+  email = motoi.okuzono+github@gmail.com
+[gpg]
+  program = gpg2
+[commit]
+  gpgsign = true
+[pull]
+  rebase = true
+[ghq]
+  root = ~/ghq
+[alias]
+  c = commit
+  cm = commit -m
+  cf = commit -m 'fixup! fix'
+  co = checkout
+  cob = checkout -b
+  cp = cherry-pick
+  r = rebase
+  s = status -s
+  wip = commit -a -m wip
+  unwip = reset @~1
+  unstage = reset HEAD
+  current = rev-parse --short HEAD
+  refresh="!f() { `git remote | grep upstream` && remote=upstream || remote=origin; branch=`git rev-parse --abbrev-ref HEAD`; git checkout master; git fetch origin master; git rebase $remote/master; git checkout $branch; git rebase master; }; f"
+  fixup="!f() { git add -A; git commit --fixup=HEAD^; git rebase -i --autosquash HEAD^^; }; f"
+  ci = "!hub issue create"
+  oi = "!hub browse -- issues/$(git rev-parse --abbrev-ref HEAD | awk -F "-" '{print $2}')"
+  cpr = "!git push origin $(git rev-parse --abbrev-ref HEAD) -f && hub pull-request -m \"issue: #$(git rev-parse --abbrev-ref HEAD | awk -F '-' '{print $2}')\" --edit"
+  opr = "!hub browse -- pull/$(git rev-parse --abbrev-ref HEAD)"
+[include]
+  path = ~/.gitconfig_local

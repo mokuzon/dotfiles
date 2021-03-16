@@ -1,1 +1,2 @@
 bind main C @bash -c "echo -n '%(commit)' | pbcopy"
+bind main R !git rebase --autosquash -i %(commit)

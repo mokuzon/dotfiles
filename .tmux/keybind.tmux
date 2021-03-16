@@ -37,15 +37,3 @@ bind-key x confirm-before -p "kill-pane #P? (y/n)" kill-pane
 bind-key r source-file ~/.tmux.conf\; display-message "Reload Config!!"
 bind-key -n C-o select-pane -t :.+
 
-is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
-  | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
-bind-key -n C-M-h if-shell "$is_vim" "send-keys C-M-h"  "select-pane -L"
-bind-key -n C-M-j if-shell "$is_vim" "send-keys C-M-j"  "select-pane -D"
-bind-key -n C-M-k if-shell "$is_vim" "send-keys C-M-k"  "select-pane -U"
-bind-key -n C-M-l if-shell "$is_vim" "send-keys C-M-l"  "select-pane -R"
-bind-key -n C-M-\ if-shell "$is_vim" "send-keys C-M-\\" "select-pane -l"
-bind-key -T copy-mode-vi C-M-h select-pane -L
-bind-key -T copy-mode-vi C-M-j select-pane -D
-bind-key -T copy-mode-vi C-M-k select-pane -U
-bind-key -T copy-mode-vi C-M-l select-pane -R
-bind-key -T copy-mode-vi C-M-\ select-pane -l

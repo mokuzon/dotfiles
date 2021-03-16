@@ -1,5 +1,6 @@
 ## My Folder
 /mine/
+/sqls/
 
 ## direnv
 .envrc
@@ -181,3 +182,7 @@ cscope.po.out
 Gemfile.local
 Gemfile.local.lock
 vendor/bundle
+
+
+# git
+worktree/

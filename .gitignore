@@ -1,13 +1,16 @@
+*.zwc
+
 /.tmux/plugins/*
 !/.tmux/plugins/tpm
 /.tmux/resurrect
 
-/.vim/plugged/*
+/.vim/bundle/*
+!/.vim/bundle/repos/github.com/Shougo/dein.vim
 /.vim/tmp/*
 /.vim/cache
 /.viminfo
 
-/.zsh/local.zsh
+/.zshenv
 /.vim/my_autoload/local.vim
 
 !.gitkeep

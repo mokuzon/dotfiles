@@ -48,7 +48,7 @@ init() {
     $PACKAGE_MANAGER install -y tmux
   fi
 
-  # nepvim install
+  # neocvim install
   if ! type vim >/dev/null 2>&1; then
     $PACKAGE_MANAGER install -y neovim/neovim/neovim
   fi
@@ -58,12 +58,11 @@ init() {
     $PACKAGE_MANAGER install -y git
   fi
 
-  pull
-  return 0
-}
+  # peco install
+  if ! type peco >/dev/null 2>&1; then
+    $PACKAGE_MANAGER install -y peco
+  fi
 
-
-pull() {
   if [ -e $DOT_PATH/.git ]; then
     cd $DOT_PATH
     git pull
@@ -71,7 +70,6 @@ pull() {
     git clone --recursive $GITHUB_URL $DOT_PATH
     cd $DOT_PATH
   fi
-
 
   for f in .??*
   do
@@ -91,44 +89,17 @@ pull() {
   /bin/bash -c 'nvim -c ":silent! PlugInstall | :qa"'
   exec "${SHELL:-/bin/zsh}"
   zplug install
-}
 
-
-commit() {
-  if [ "$1" = "" ]; then
-    MESSAGE="update"
-  else
-    MESSAGE="$1"
-  fi
-  git add --all
-  git commit -m "$MESSAGE"
   return 0
 }
-
-
-push() {
-  git push origin master
-  return 0
-}
-
 
 usage() {
   return 0
 }
 
-
 main() {
   if [[ "$1" == "init" ]]; then
   	init
-    return 0
-  elif [[ "$1" == "commit" ]]; then
-    commit "$2"
-    return 0
-  elif [[ "$1" == "push" ]]; then
-    push
-    return 0
-  elif [[ "$1" == "pull" ]]; then
-  	pull
     return 0
   else
     usage
