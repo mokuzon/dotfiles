@@ -52,6 +52,8 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('907th/vim-auto-save') " auto save
   call dein#add('tomtom/tcomment_vim')  " comment out
   call dein#add('preservim/nerdtree')
+  call dein#add('vim-test/vim-test')
+  call dein#add('tpope/vim-dispatch')
 
   " Git
   call dein#add('tpope/vim-fugitive')
@@ -59,10 +61,10 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('airblade/vim-gitgutter')
 
   " Ruby
+  call dein#add('vim-ruby/vim-ruby')
+  call dein#add('tpope/vim-rails')
   call dein#add('tpope/vim-endwise')
   call dein#add('rlue/vim-fold-rspec')
-  call dein#add('tpope/vim-rails')
-  call dein#add('vim-scripts/ruby-matchit')
 
   " Jsonnet
   call dein#add('google/vim-jsonnet')
@@ -87,6 +89,8 @@ let g:auto_save_silent = 1
 let g:auto_save_events = ['InsertLeave', 'CursorHold']
 set updatetime=100
 
+let g:extra_whitespace_ignored_filetypes = ['diff', 'gitcommit', 'qf', 'help']
+
 let g:fold_rspec_foldenable = 0
 let g:fold_rspec_foldclose = 'all'
 let g:fold_rspec_foldminlines = 2
@@ -97,6 +101,12 @@ au BufRead,BufNewFile *.jsx set filetype=javascript.jsx
 au BufRead,BufNewFile *.tsx set filetype=typescript.tsx
 au BufRead,BufNewFile *.iam set filetype=ruby
 au FileType json syntax match Comment +\/\/.\+$+ " allow comment syntax for json
+
+let g:test#strategy = 'dispatch'
+let g:dispatch_compilers = {
+  \ 'bundle exec': 'rake',
+  \ }
+let g:test#ruby#rspec#options = '--require ~/.vim/rspec_quickfix_formatter.rb --format QuickfixFormatter'
 
 "" appearance
 syntax on
@@ -245,7 +255,7 @@ nnoremap # #zz
 nnoremap <S-k> :bn<CR>
 nnoremap <S-j> :bp<CR>
 nnoremap <S-x> :bp<CR>:bd #<CR>
-
+autocmd FileType qf nnoremap <S-x> :cclose<CR>
 
 inoremap <C-u> <C-g>u<C-u>
 inoremap <C-w> <C-g>u<C-w>
@@ -285,6 +295,10 @@ nnoremap yy "*yy
 nnoremap P "*p
 
 inoremap <silent> jj <ESC>
+
+nnoremap tf :TestFile<CR>
+nnoremap tn :TestNearest<CR>
+nnoremap tl :TestLast<CR>
 
 "" locad local rc
 runtime! local.vim
