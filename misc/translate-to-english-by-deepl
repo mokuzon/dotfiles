@@ -1,0 +1,23 @@
+#!/usr/bin/ruby
+
+require 'net/http'
+require 'json'
+
+while text = $stdin.gets
+  text.chomp!
+  indent = text[/\A(\s*).*\z/, 1]
+
+  query = {
+    auth_key: ENV.fetch('DEEPL_API_KEY'),
+    text: URI.encode(text.lstrip),
+    source_lang: 'JA',
+    target_lang: 'EN',
+  }
+  query_str = query.map{ |k, v| "#{k}=#{v}" }.join("&")
+
+  uri = URI.parse("https://api.deepl.com/v2/translate?#{query_str}")
+  response = Net::HTTP.get_response(uri)
+
+  result = JSON.parse(response.body)['translations'][0]['text']
+  puts "#{indent}#{result}"
+end

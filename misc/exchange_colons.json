@@ -26,7 +26,8 @@
             {
               "type": "frontmost_application_unless",
               "bundle_identifiers": [
-                "^io\\.alacritty$"
+                "^io\\.alacritty$",
+                "^com\\.microsoft\\.VSCode$"
               ]
             }
           ]
@@ -53,7 +54,8 @@
             {
               "type": "frontmost_application_unless",
               "bundle_identifiers": [
-                "^io\\.alacritty$"
+                "^io\\.alacritty$",
+                "^com\\.microsoft\\.VSCode$"
               ]
             }
           ]

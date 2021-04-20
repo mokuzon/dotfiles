@@ -6,6 +6,8 @@ set mouse=a
 set modifiable
 set noswapfile
 set autoread
+set foldmethod=indent
+set foldlevel=100
 
 " tab
 filetype plugin indent on
@@ -64,7 +66,6 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('vim-ruby/vim-ruby')
   call dein#add('tpope/vim-rails')
   call dein#add('tpope/vim-endwise')
-  call dein#add('rlue/vim-fold-rspec')
 
   " Jsonnet
   call dein#add('google/vim-jsonnet')
@@ -91,11 +92,6 @@ set updatetime=100
 
 let g:extra_whitespace_ignored_filetypes = ['diff', 'gitcommit', 'qf', 'help']
 
-let g:fold_rspec_foldenable = 0
-let g:fold_rspec_foldclose = 'all'
-let g:fold_rspec_foldminlines = 2
-let g:fold_rspec_foldlevel = 2
-
 "" filetypes
 au BufRead,BufNewFile *.jsx set filetype=javascript.jsx
 au BufRead,BufNewFile *.tsx set filetype=typescript.tsx
@@ -106,7 +102,7 @@ let g:test#strategy = 'dispatch'
 let g:dispatch_compilers = {
   \ 'bundle exec': 'rake',
   \ }
-let g:test#ruby#rspec#options = '--require ~/.vim/rspec_quickfix_formatter.rb --format QuickfixFormatter'
+let g:test#ruby#rspec#options = '--require ~/.vim/rspec_quickfix_formatter.rb --format QuickfixFormatter 2>/dev/null'
 
 "" appearance
 syntax on
@@ -299,6 +295,8 @@ inoremap <silent> jj <ESC>
 nnoremap tf :TestFile<CR>
 nnoremap tn :TestNearest<CR>
 nnoremap tl :TestLast<CR>
+
+vnoremap dl :!translate-to-english-by-deepl<CR>
 
 "" locad local rc
 runtime! local.vim

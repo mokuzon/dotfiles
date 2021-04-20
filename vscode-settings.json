@@ -1,0 +1,199 @@
+{
+    "vim.normalModeKeyBindings": [
+        {
+            "before": ["<C-a>"],
+            "after": ["<Home>"]
+        },
+        {
+            "before": ["<C-e>"],
+            "after": ["<End>"]
+        },
+        {
+            "before": ["<C-p>"],
+            "after": ["<Up>"]
+        },
+        {
+            "before": ["<C-n>"],
+            "after": ["<Down>"]
+        },
+        {
+            "before": ["<C-f>"],
+            "after": ["<Right>"]
+        },
+        {
+            "before": ["<C-b>"],
+            "after": ["<Left>"]
+        },
+        {
+            "before": ["<C-d>"],
+            "after": ["<Del>"]
+        },
+        {
+            "before": ["<C-d>"],
+            "after": ["<BS>"]
+        },
+        {
+            "before": ["<S-k>"],
+            "commands": [{ "command": "workbench.action.nextEditor" }]
+        },
+        {
+            "before": ["<S-j>"],
+            "commands": [{ "command": "workbench.action.previousEditor" }]
+        },
+        {
+            "before": ["<S-x>"],
+            "commands": [{ "command": "workbench.action.closeActiveEditor" }]
+        },
+        {
+            "before": ["f", "f"],
+            "commands": [{ "command": "workbench.action.quickOpen" }]
+        }
+    ],
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        },
+        {
+            "before": ["<C-a>"],
+            "after": ["<Home>"]
+        },
+        {
+            "before": ["<C-e>"],
+            "after": ["<End>"]
+        },
+        {
+            "before": ["<C-p>"],
+            "after": ["<Up>"]
+        },
+        {
+            "before": ["<C-n>"],
+            "after": ["<Down>"]
+        },
+        {
+            "before": ["<C-f>"],
+            "after": ["<Right>"]
+        },
+        {
+            "before": ["<C-b>"],
+            "after": ["<Left>"]
+        },
+        {
+            "before": ["<C-d>"],
+            "after": ["<Del>"]
+        },
+        {
+            "before": ["<C-d>"],
+            "after": ["<BS>"]
+        }
+    ],
+    "vim.visualModeKeyBindings": [
+        {
+            "before": ["<C-a>"],
+            "after": ["<Home>"]
+        },
+        {
+            "before": ["<C-e>"],
+            "after": ["<End>"]
+        },
+        {
+            "before": ["<C-p>"],
+            "after": ["<Up>"]
+        },
+        {
+            "before": ["<C-n>"],
+            "after": ["<Down>"]
+        },
+        {
+            "before": ["<C-f>"],
+            "after": ["<Right>"]
+        },
+        {
+            "before": ["<C-b>"],
+            "after": ["<Left>"]
+        },
+        {
+            "before": ["<C-d>"],
+            "after": ["<Del>"]
+        },
+        {
+            "before": ["<C-d>"],
+            "after": ["<BS>"]
+        }
+    ],
+    "vim.commandModeKeyBindings": [
+        {
+            "before": ["<C-a>"],
+            "after": ["<Home>"]
+        },
+        {
+            "before": ["<C-e>"],
+            "after": ["<End>"]
+        },
+        {
+            "before": ["<C-p>"],
+            "after": ["<Up>"]
+        },
+        {
+            "before": ["<C-n>"],
+            "after": ["<Down>"]
+        },
+        {
+            "before": ["<C-f>"],
+            "after": ["<Right>"]
+        },
+        {
+            "before": ["<C-b>"],
+            "after": ["<Left>"]
+        },
+        {
+            "before": ["<C-d>"],
+            "after": ["<Del>"]
+        },
+        {
+            "before": ["<C-d>"],
+            "after": ["<BS>"]
+        }
+    ],
+    "vim.useSystemClipboard": true,
+    "vim.statusBarColorControl": true,
+    "vim.statusBarColors.normal": "#b5bc67",
+    "vim.statusBarColors.insert": "#81a2bd",
+    "vim.statusBarColors.visual": "#cc6565",
+    "vim.statusBarColors.visualline": "#cc6565",
+    "vim.statusBarColors.visualblock": "#81a2bd",
+    "editor.fontFamily": "Inconsolata",
+    "editor.fontSize": 16,
+    "workbench.colorTheme": "Hybrid Next",
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#cc6565",
+        "statusBar.noFolderBackground": "#cc6565",
+        "statusBar.debuggingBackground": "#cc6565",
+        "editor.background": "#222222",
+        "terminal.background": "#222222",
+        "terminal.foreground": "#dbdbdb",
+        "terminalCursor.background": "#A5A2A2",
+        "terminalCursor.foreground": "#A5A2A2",
+        "terminal.ansiBrightBlack": "#373b40",
+        "terminal.ansiBrightBlue": "#81a2bd",
+        "terminal.ansiBrightCyan": "#9fc9c3",
+        "terminal.ansiBrightGreen": "#b5bc67",
+        "terminal.ansiBrightMagenta": "#b294ba",
+        "terminal.ansiBrightRed": "#cc6565",
+        "terminal.ansiBrightWhite": "#c5c8c6",
+        "terminal.ansiBrightYellow": "#f0c673",
+        "terminal.ansiBlack": "#27292c",
+        "terminal.ansiBlue": "#5f809d",
+        "terminal.ansiCyan": "#5e8c86",
+        "terminal.ansiGreen": "#8c943f",
+        "terminal.ansiMagenta": "#85668e",
+        "terminal.ansiRed": "#a54141",
+        "terminal.ansiWhite": "#707780",
+        "terminal.ansiYellow": "#de925e"
+    },
+    "files.autoSave": "afterDelay",
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.fontFamily": "Inconsolata",
+    "files.insertFinalNewline": true,
+    "workbench.editor.openPositioning": "last"
+}
