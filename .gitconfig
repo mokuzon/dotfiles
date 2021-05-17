@@ -4,7 +4,7 @@
   name = Motoi Okuzono
   email = motoi.okuzono+github@gmail.com
 [gpg]
-  program = gpg2
+	program = /opt/homebrew/bin/gpg
 [commit]
   gpgsign = true
 [pull]
