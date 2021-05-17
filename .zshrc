@@ -30,7 +30,7 @@ export EDITOR=nvim
 export LC_ALL='en_US.UTF-8'
 export GOPATH=$HOME/.go
 export TERM=xterm-256color
-export GHQ_ROOT=$HOME/ghq
+export GHQ_ROOT=$HOME/GitHub
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
 export FZF_DEFAULT_OPTS='--reverse'
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
