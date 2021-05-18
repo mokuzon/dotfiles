@@ -239,7 +239,7 @@ noremap <C-t> <Nop> " for tmux
 imap <CR> <C-R>=pumvisible() && complete_info()['selected'] != -1 ? '<C-y>' : "\n"<CR>
 
 nnoremap <M-p> :call Openpr()<CR>
-nnoremap <M-g> :Gbrowse master:%<CR>
+nnoremap <M-g> :GBrowse master:%<CR>
 nnoremap <M-n> :NERDTreeToggle<CR>
 
 nnoremap n nzz
