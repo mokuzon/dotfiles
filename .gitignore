@@ -4,6 +4,7 @@
 !/.tmux/plugins/tpm
 /.tmux/resurrect
 
+/.vim/local.vim
 /.vim/bundle/*
 !/.vim/bundle/repos/github.com/Shougo/dein.vim
 /.vim/tmp/*

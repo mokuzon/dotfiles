@@ -299,4 +299,4 @@ nnoremap tl :TestLast<CR>
 vnoremap dl :!translate-to-english-by-deepl<CR>
 
 "" locad local rc
-runtime! local.vim
+source ~/.vim/local.vim
