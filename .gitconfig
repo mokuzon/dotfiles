@@ -32,3 +32,5 @@
   opr = "!hub browse -- pull/$(git rev-parse --abbrev-ref HEAD)"
 [include]
   path = ~/.gitconfig_local
+[hub]
+	host = github.com

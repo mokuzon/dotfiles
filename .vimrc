@@ -61,6 +61,8 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('tpope/vim-fugitive')
   call dein#add('tpope/vim-rhubarb')
   call dein#add('airblade/vim-gitgutter')
+  call dein#add('tyru/open-browser.vim')
+  call dein#add('tyru/open-browser-github.vim')
 
   " Ruby
   call dein#add('vim-ruby/vim-ruby')
@@ -89,6 +91,8 @@ let g:auto_save = 1
 let g:auto_save_silent = 1
 let g:auto_save_events = ['InsertLeave', 'CursorHold']
 set updatetime=100
+
+let g:openbrowser_github_always_used_branch = 'master'
 
 let g:extra_whitespace_ignored_filetypes = ['diff', 'gitcommit', 'qf', 'help']
 
@@ -238,9 +242,10 @@ let g:rainbow_active = 1
 noremap <C-t> <Nop> " for tmux
 imap <CR> <C-R>=pumvisible() && complete_info()['selected'] != -1 ? '<C-y>' : "\n"<CR>
 
-nnoremap <M-p> :call Openpr()<CR>
-nnoremap <M-g> :GBrowse master:%<CR>
 nnoremap <M-n> :NERDTreeToggle<CR>
+nnoremap <M-p> :call Openpr()<CR>
+nnoremap <M-g> :OpenGithubFile<CR>
+vnoremap <M-g> :OpenGithubFile<CR>
 
 nnoremap n nzz
 nnoremap N Nzz
