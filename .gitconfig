@@ -24,7 +24,7 @@
   unwip = reset @~1
   unstage = reset HEAD
   current = rev-parse --short HEAD
-  refresh="!f() { `git remote | grep upstream` && remote=upstream || remote=origin; branch=`git rev-parse --abbrev-ref HEAD`; git checkout master; git fetch origin master; git rebase $remote/master; git checkout $branch; git rebase master; }; f"
+  refresh="!f() { `git remote | grep upstream` && remote=upstream || remote=origin; branch=`git rev-parse --abbrev-ref HEAD`; default_branch=`git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`; git checkout $default_branch; git fetch origin $default_branch; git rebase $remote/$default_branch; git checkout $branch; git rebase $default_branch; }; f"
   fixup="!f() { git add -A; git commit --fixup=HEAD^; git rebase -i --autosquash HEAD^^; }; f"
   ci = "!hub issue create"
   oi = "!hub browse -- issues/$(git rev-parse --abbrev-ref HEAD | awk -F "-" '{print $2}')"
