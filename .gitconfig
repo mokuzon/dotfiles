@@ -14,7 +14,7 @@
 [alias]
   c = commit
   cm = commit -m
-  cf = commit -m 'fixup! fix'
+  cf = commit --fixup
   co = checkout
   cob = checkout -b
   cp = cherry-pick

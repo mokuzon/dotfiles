@@ -110,6 +110,25 @@ function file-search(){
 }
 zle -N file-search
 
+git-commit-hash-list() {
+  git log -n1000 --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |\
+    fzf -m --ansi --no-sort --reverse --tiebreak=index --preview 'f() {
+      set -- $(echo "$@" | grep -o "[a-f0-9]\{7\}" | head -1);
+      if [ $1 ]; then
+        git show --color $1
+      else
+        echo "blank"
+      fi
+    }; f {}' |\
+    grep -o "[a-f0-9]\{7\}" |
+    tr '\n' ' '
+}
+function git-commit-hash(){
+  LBUFFER+=$(git-commit-hash-list)
+  CURSOR=$#LBUFFER
+  zle reset-prompt
+}
+zle -N git-commit-hash
 
 ######################################################################
 ### keybind
@@ -123,6 +142,7 @@ bindkey '^xe' anyframe-widget-insert-git-branch
 bindkey '^xg' anyframe-widget-cd-ghq-repository
 bindkey '^xf' file-search
 bindkey '^xw' git-changed
+bindkey '^xc' git-commit-hash
 
 
 ######################################################################
