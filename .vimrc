@@ -56,6 +56,7 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('preservim/nerdtree')
   call dein#add('vim-test/vim-test')
   call dein#add('tpope/vim-dispatch')
+  call dein#add('jparise/vim-graphql')
 
   " Git
   call dein#add('tpope/vim-fugitive')
@@ -108,6 +109,63 @@ let g:dispatch_compilers = {
   \ }
 let g:test#ruby#rspec#options = '--require ~/.vim/rspec_quickfix_formatter.rb --format QuickfixFormatter 2>/dev/null'
 
+"" NERDTree
+hi NERDTreeDir ctermfg=110
+hi NERDTreeUp ctermfg=9
+hi NERDTreeDirSlash ctermfg=110
+hi NERDTReeCWD ctermfg=14
+
+let g:NERDTreeIndicatorMapCustom = {
+  \ "Modified"  : "!",
+  \ "Staged"    : "+",
+  \ "Untracked" : "N",
+  \ "Renamed"   : "R",
+  \ "Unmerged"  : "═",
+  \ "Deleted"   : "D",
+  \ "Dirty"     : "✗",
+  \ "Clean"     : "✔︎",
+  \ "Unknown"   : "?"
+\ }
+
+let NERDTreeShowHidden = 1  " show hidden files
+let NERDTreeWinSize = 45
+let g:NERDTreeMapJumpNextSibling = ''
+
+function! IsNERDTreeOpen()
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+function! SyncTree()
+  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
+
+function! LaunchNERDTree()
+  if index(['gitrebase'], &filetype) != -1
+    return
+  endif
+
+  NERDTree
+  wincmd p
+  call SyncTree()
+endfunction
+
+function! CloseBufferOrVim()
+  if &filetype == 'qf'
+    cclose
+  elseif len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) >= 2
+    bprev
+    bdelete #
+  else
+    qa
+  endif
+endfunction
+
+autocmd VimEnter * call LaunchNERDTree()
+autocmd BufEnter * call SyncTree()
+
 "" appearance
 syntax on
 set background=dark
@@ -144,27 +202,6 @@ hi BufTabLineHidden ctermfg=231 ctermbg=238
 hi BufTabLineFill ctermbg=237
 
 set laststatus=2
-
-hi NERDTreeDir ctermfg=110
-hi NERDTreeUp ctermfg=9
-hi NERDTreeDirSlash ctermfg=110
-hi NERDTReeCWD ctermfg=14
-
-let g:NERDTreeIndicatorMapCustom = {
-  \ "Modified"  : "!",
-  \ "Staged"    : "+",
-  \ "Untracked" : "N",
-  \ "Renamed"   : "R",
-  \ "Unmerged"  : "═",
-  \ "Deleted"   : "D",
-  \ "Dirty"     : "✗",
-  \ "Clean"     : "✔︎",
-  \ "Unknown"   : "?"
-\ }
-
-let NERDTreeShowHidden = 1  " show hidden files
-let NERDTreeWinSize = 45
-let g:NERDTreeMapJumpNextSibling = ''
 
 set autoread
 augroup checktime
@@ -255,8 +292,7 @@ nnoremap # #zz
 " buffer
 nnoremap <S-k> :bn<CR>
 nnoremap <S-j> :bp<CR>
-nnoremap <S-x> :bp<CR>:bd #<CR>
-autocmd FileType qf nnoremap <S-x> :cclose<CR>
+nnoremap <S-x> :call CloseBufferOrVim()<CR>
 
 inoremap <C-u> <C-g>u<C-u>
 inoremap <C-w> <C-g>u<C-w>
