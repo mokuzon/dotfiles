@@ -49,6 +49,7 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('antoinemadec/coc-fzf', { 'build': 'yarn install --frozen-lockfile' })
 
   " Utility
+  call dein#add('editorconfig/editorconfig-vim')
   call dein#add('junegunn/fzf', { 'build': './install --all' })
   call dein#add('junegunn/fzf.vim')
   call dein#add('907th/vim-auto-save') " auto save
@@ -64,6 +65,9 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('tyru/open-browser.vim')
   call dein#add('tyru/open-browser-github.vim')
+
+  " TypeScript
+  call dein#add('MaxMEllon/vim-jsx-pretty')
 
   " Ruby
   call dein#add('vim-ruby/vim-ruby')
@@ -98,9 +102,7 @@ let g:openbrowser_github_always_used_branch = 'master'
 let g:extra_whitespace_ignored_filetypes = ['diff', 'gitcommit', 'qf', 'help']
 
 "" filetypes
-au BufRead,BufNewFile *.jsx set filetype=javascript.jsx
-au BufRead,BufNewFile *.tsx set filetype=typescript.tsx
-au BufRead,BufNewFile *.iam set filetype=ruby
+au BufNewFile,BufRead *.iam set filetype=ruby
 au FileType json syntax match Comment +\/\/.\+$+ " allow comment syntax for json
 
 let g:test#strategy = 'dispatch'
