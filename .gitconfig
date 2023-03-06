@@ -34,3 +34,5 @@
   path = ~/.gitconfig_local
 [hub]
 	host = github.com
+[init]
+	defaultBranch = main

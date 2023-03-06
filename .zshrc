@@ -22,7 +22,6 @@ setopt no_beep
 setopt nonomatch
 setopt print_eight_bit
 
-
 ######################################################################
 ### path
 ######################################################################
@@ -146,29 +145,6 @@ bindkey '^xc' git-commit-hash
 
 
 ######################################################################
-### tmux
-######################################################################
-if [[ ! -n $TMUX ]]; then
-  ID="`tmux list-sessions`"
-  if [[ -z "$ID" ]]; then
-    tmux new-session
-  fi
-  ID="`echo $ID | peco | cut -d: -f1`"
-  tmux attach-session -t "$ID"
-fi
-
-autoload -Uz add-zsh-hook
-function rename_tmux_window() {
-  if [[ -n $TMUX ]]; then
-    local current_path=`pwd | sed -e s/\ /_/g`
-    local current_dir=`basename $current_path`
-    tmux rename-window $current_dir
-  fi
-}
-add-zsh-hook precmd rename_tmux_window
-
-
-######################################################################
 ### prompt
 ######################################################################
 local cdir='%(?.%F{green}.%F{yellow})%n%f at %F{cyan}%m%f in %F{blue}%~%f'
@@ -189,3 +165,7 @@ ${cdir}${vcs_info_msg_0_} %F{238}[%*]%f
 %(?.%F{green}.%F{yellow})%(?.${success}.${fail})%f $ %b'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/motoi-okuzono/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)

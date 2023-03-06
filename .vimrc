@@ -8,6 +8,7 @@ set noswapfile
 set autoread
 set foldmethod=indent
 set foldlevel=100
+set clipboard=unnamedplus
 
 " tab
 filetype plugin indent on
@@ -44,11 +45,13 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('neoclide/coc-eslint', { 'build': 'yarn install --frozen-lockfile' })
   call dein#add('neoclide/coc-prettier', { 'build': 'yarn install --frozen-lockfile' })
   call dein#add('neoclide/coc-solargraph', { 'build': 'yarn install --frozen-lockfile' })
+  call dein#add('neoclide/coc-tabnine', { 'build': 'yarn install --frozen-lockfile' })
   call dein#add('neoclide/coc-html', { 'build': 'yarn install --frozen-lockfile' })
   call dein#add('neoclide/coc-css', { 'build': 'yarn install --frozen-lockfile' })
+  call dein#add('felippepuhle/coc-graphql', { 'build': 'yarn install --frozen-lockfile' })
   call dein#add('antoinemadec/coc-fzf', { 'build': 'yarn install --frozen-lockfile' })
 
-  " Utility
+  " " Utility
   call dein#add('editorconfig/editorconfig-vim')
   call dein#add('junegunn/fzf', { 'build': './install --all' })
   call dein#add('junegunn/fzf.vim')
@@ -58,6 +61,7 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('vim-test/vim-test')
   call dein#add('tpope/vim-dispatch')
   call dein#add('jparise/vim-graphql')
+  call dein#add('github/copilot.vim')
 
   " Git
   call dein#add('tpope/vim-fugitive')
@@ -66,9 +70,6 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('tyru/open-browser.vim')
   call dein#add('tyru/open-browser-github.vim')
 
-  " TypeScript
-  call dein#add('MaxMEllon/vim-jsx-pretty')
-
   " Ruby
   call dein#add('vim-ruby/vim-ruby')
   call dein#add('tpope/vim-rails')
@@ -76,6 +77,9 @@ if dein#load_state('~/.vim/bundle')
 
   " Jsonnet
   call dein#add('google/vim-jsonnet')
+
+  " terraform
+  call dein#add('hashivim/vim-terraform')
 
   call dein#end()
   call dein#save_state()
@@ -86,18 +90,13 @@ nmap <silent> <C-]> <Plug>(coc-definition)
 let $FZF_DEFAULT_OPTS='--extended --layout=reverse --cycle'
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow'
 
-noremap <silent> fb :Buffers<CR>
-noremap <silent> ff :Files<CR>
-noremap <silent> fg :GFiles?<CR>
-noremap <silent> fh :History<CR>
-noremap <silent> fr :Rg <C-R><C-W><CR>
-
 let g:auto_save = 1
 let g:auto_save_silent = 1
 let g:auto_save_events = ['InsertLeave', 'CursorHold']
 set updatetime=100
 
-let g:openbrowser_github_always_used_branch = 'master'
+" let g:openbrowser_github_always_used_branch = system("git remote show origin | grep 'HEAD branch' | awk '{print $NF}'")
+let g:openbrowser_github_always_used_branch = 'main'
 
 let g:extra_whitespace_ignored_filetypes = ['diff', 'gitcommit', 'qf', 'help']
 
@@ -188,8 +187,7 @@ hi LineNr ctermbg=236 ctermfg=243
 hi CursorLineNr term=bold ctermfg=255
 hi Visual ctermbg=1
 hi Comment ctermfg=243
-hi Pmenu ctermfg=white ctermbg=8
-hi PmenuSel ctermfg=32 ctermbg=220
+hi CocMenuSel ctermfg=15 ctermbg=25
 hi SearchCurrent ctermfg=255 ctermbg=32
 hi GitGutterAdd    ctermfg=64 ctermbg=149
 hi GitGutterChange ctermfg=3 ctermbg=227
@@ -277,14 +275,26 @@ endfunction
 
 let g:rainbow_active = 1
 
-"" keymap
+"" keymaps
 noremap <C-t> <Nop> " for tmux
-imap <CR> <C-R>=pumvisible() && complete_info()['selected'] != -1 ? '<C-y>' : "\n"<CR>
+
+inoremap <silent><expr> <C-n> coc#pum#visible() ? coc#pum#next(1) : "<Down>"
+inoremap <silent><expr> <C-p> coc#pum#visible() ? coc#pum#prev(1) : "<Up>"
+inoremap <silent><expr> <Enter> coc#pum#visible() ? coc#pum#confirm() : "<Enter>"
+inoremap <silent><expr> <C-e> coc#pum#visible() ? coc#pum#cancel() : "<End>"
+
+noremap <silent> fb :Buffers<CR>
+noremap <silent> ff :Files<CR>
+noremap <silent> fg :GFiles?<CR>
+noremap <silent> fh :History<CR>
+noremap <silent> fr :Rg <C-R><C-W><CR>
 
 nnoremap <M-n> :NERDTreeToggle<CR>
 nnoremap <M-p> :call Openpr()<CR>
 nnoremap <M-g> :OpenGithubFile<CR>
 vnoremap <M-g> :OpenGithubFile<CR>
+
+vnoremap dl :!translate-to-english-by-deepl<CR>
 
 nnoremap n nzz
 nnoremap N Nzz
@@ -307,8 +317,6 @@ noremap <C-a> <home>
 noremap <C-e> <End>
 noremap <C-d> <Del>
 
-inoremap <C-p> <Up>
-inoremap <C-n> <Down>
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 inoremap <C-a> <home>
@@ -334,12 +342,6 @@ nnoremap yy "*yy
 nnoremap P "*p
 
 inoremap <silent> jj <ESC>
-
-nnoremap tf :TestFile<CR>
-nnoremap tn :TestNearest<CR>
-nnoremap tl :TestLast<CR>
-
-vnoremap dl :!translate-to-english-by-deepl<CR>
 
 "" locad local rc
 source ~/.vim/local.vim

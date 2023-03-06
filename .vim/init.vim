@@ -1,1 +1,0 @@
-/Users/motoi-okuzono/.dotfiles/.vimrc

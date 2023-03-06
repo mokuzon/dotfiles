@@ -13,7 +13,7 @@ while text = $stdin.gets
     source_lang: 'JA',
     target_lang: 'EN',
   }
-  query_str = query.map{ |k, v| "#{k}=#{v}" }.join("&")
+  query_str = query.map { |k, v| "#{k}=#{v}" }.join("&")
 
   uri = URI.parse("https://api.deepl.com/v2/translate?#{query_str}")
   response = Net::HTTP.get_response(uri)
