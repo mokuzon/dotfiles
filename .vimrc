@@ -38,20 +38,8 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('bronson/vim-trailing-whitespace')  " highlight unused white space
   call dein#add('ap/vim-buftabline') " make buffer visible like tabs
 
-  " CoC
-  call dein#add('neoclide/coc.nvim', { 'build': 'yarn install --frozen-lockfile' })
-  call dein#add('neoclide/coc-highlight', { 'build': 'yarn install --frozen-lockfile' })
-  call dein#add('neoclide/coc-tsserver', { 'build': 'yarn install --frozen-lockfile' })
-  call dein#add('neoclide/coc-eslint', { 'build': 'yarn install --frozen-lockfile' })
-  call dein#add('neoclide/coc-prettier', { 'build': 'yarn install --frozen-lockfile' })
-  call dein#add('neoclide/coc-solargraph', { 'build': 'yarn install --frozen-lockfile' })
-  call dein#add('neoclide/coc-tabnine', { 'build': 'yarn install --frozen-lockfile' })
-  call dein#add('neoclide/coc-html', { 'build': 'yarn install --frozen-lockfile' })
-  call dein#add('neoclide/coc-css', { 'build': 'yarn install --frozen-lockfile' })
-  call dein#add('felippepuhle/coc-graphql', { 'build': 'yarn install --frozen-lockfile' })
-  call dein#add('antoinemadec/coc-fzf', { 'build': 'yarn install --frozen-lockfile' })
-
-  " " Utility
+  " Utility
+  call dein#add('neoclide/coc.nvim', { 'rev': 'release' })
   call dein#add('editorconfig/editorconfig-vim')
   call dein#add('junegunn/fzf', { 'build': './install --all' })
   call dein#add('junegunn/fzf.vim')
@@ -62,6 +50,7 @@ if dein#load_state('~/.vim/bundle')
   call dein#add('tpope/vim-dispatch')
   call dein#add('jparise/vim-graphql')
   call dein#add('github/copilot.vim')
+  call dein#add('Shougo/vimproc.vim', { 'build' : 'make' })
 
   " Git
   call dein#add('tpope/vim-fugitive')
@@ -85,6 +74,10 @@ if dein#load_state('~/.vim/bundle')
   call dein#save_state()
 endif
 
+function! InstallCocExtentions()
+  CocInstall -sync coc-highlight coc-tsserver coc-eslint coc-prettier coc-solargraph coc-html coc-css felippepuhle/coc-graphql antoinemadec/coc-fzf
+endfunction
+
 nmap <silent> <C-]> <Plug>(coc-definition)
 
 let $FZF_DEFAULT_OPTS='--extended --layout=reverse --cycle'
@@ -94,9 +87,6 @@ let g:auto_save = 1
 let g:auto_save_silent = 1
 let g:auto_save_events = ['InsertLeave', 'CursorHold']
 set updatetime=100
-
-" let g:openbrowser_github_always_used_branch = system("git remote show origin | grep 'HEAD branch' | awk '{print $NF}'")
-let g:openbrowser_github_always_used_branch = 'main'
 
 let g:extra_whitespace_ignored_filetypes = ['diff', 'gitcommit', 'qf', 'help']
 
@@ -206,6 +196,12 @@ set laststatus=2
 set autoread
 augroup checktime
   au!
+
+let g:openbrowser_github_always_used_branch = vimproc#system("git remote show origin | grep 'HEAD branch' | awk '{print $NF}' | awk '{printf $0}'")
+
+let g:extra_whitespace_ignored_filetypes = ['diff', 'gitcommit', 'qf', 'help']
+
+"
   autocmd BufEnter        * silent! checktime
   autocmd CursorHold      * silent! checktime
   autocmd CursorHoldI     * silent! checktime
@@ -291,8 +287,8 @@ noremap <silent> fr :Rg <C-R><C-W><CR>
 
 nnoremap <M-n> :NERDTreeToggle<CR>
 nnoremap <M-p> :call Openpr()<CR>
-nnoremap <M-g> :OpenGithubFile<CR>
-vnoremap <M-g> :OpenGithubFile<CR>
+nnoremap <M-g> :silent! OpenGithubFile<CR>
+vnoremap <M-g> :silent! OpenGithubFile<CR>
 
 vnoremap dl :!translate-to-english-by-deepl<CR>
 

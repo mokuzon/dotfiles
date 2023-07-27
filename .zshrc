@@ -29,7 +29,7 @@ export EDITOR=nvim
 export LC_ALL='en_US.UTF-8'
 export GOPATH=$HOME/.go
 export TERM=xterm-256color
-export GHQ_ROOT=$HOME/GitHub
+export GHQ_ROOT=$HOME/ghq
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
 export FZF_DEFAULT_OPTS='--reverse'
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
@@ -75,12 +75,7 @@ alias tmux-revertkey='tmux set-option -ag prefix C-t'
 ######################################################################
 ### tools
 ######################################################################
-# hub
 eval "$(hub alias -s)"
-
-# anyenv
-eval "$(anyenv lazyload)"
-eval "$(rbenv init -)"
 eval "$(direnv hook zsh)"
 
 

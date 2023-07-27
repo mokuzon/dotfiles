@@ -186,3 +186,7 @@ vendor/bundle
 
 # git
 worktree/
+
+
+# VisualCode
+.vscode/
