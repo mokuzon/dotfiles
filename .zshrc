@@ -35,6 +35,7 @@ export FZF_DEFAULT_OPTS='--reverse'
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+export PATH="$HOME/.jenv/bin:$PATH"
 export PATH=$GOPATH/bin:$PATH
 export PATH=/opt/brew/bin:$PATH
 
@@ -78,6 +79,8 @@ alias tmux-revertkey='tmux set-option -ag prefix C-t'
 ### tools
 ######################################################################
 eval "$(direnv hook zsh)"
+eval "$(jenv init -)"
+
 
 
 ######################################################################
