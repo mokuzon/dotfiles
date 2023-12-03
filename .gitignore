@@ -1,5 +1,9 @@
 *.zwc
 
+/.config/karabiner
+/.config/coc
+/.config/github-copilot
+
 /.tmux/plugins/*
 !/.tmux/plugins/tpm
 /.tmux/resurrect
