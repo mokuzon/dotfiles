@@ -1,8 +1,8 @@
 *.zwc
 
-/.config/karabiner
-/.config/coc
-/.config/github-copilot
+/.config
+!/.config/alacritty
+!/.config/nvim
 
 /.tmux/plugins/*
 !/.tmux/plugins/tpm

@@ -29,10 +29,12 @@ export EDITOR=nvim
 export LC_ALL='en_US.UTF-8'
 export GOPATH=$HOME/.go
 export TERM=xterm-256color
-export GHQ_ROOT=$HOME/ghq
+export GHQ_ROOT=$HOME/Development/GitHub
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
 export FZF_DEFAULT_OPTS='--reverse'
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
 export PATH=$GOPATH/bin:$PATH
 export PATH=/opt/brew/bin:$PATH
 
@@ -75,7 +77,6 @@ alias tmux-revertkey='tmux set-option -ag prefix C-t'
 ######################################################################
 ### tools
 ######################################################################
-eval "$(hub alias -s)"
 eval "$(direnv hook zsh)"
 
 
@@ -160,7 +161,3 @@ ${cdir}${vcs_info_msg_0_} %F{238}[%*]%f
 %(?.%F{green}.%F{yellow})%(?.${success}.${fail})%f $ %b'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/motoi-okuzono/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
