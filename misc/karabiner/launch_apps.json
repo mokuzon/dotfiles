@@ -33,7 +33,7 @@
           },
           "to": [
             {
-              "shell_command": "open '/Applications/iTerm.app'"
+              "shell_command": "open '/Applications/IntelliJ IDEA.app'"
             }
           ],
           "type": "basic"
@@ -74,7 +74,7 @@
         },
         {
           "from": {
-            "key_code": "b",
+            "key_code": "d",
             "modifiers": {
               "mandatory": [
                 "left_control",
@@ -84,7 +84,7 @@
           },
           "to": [
             {
-              "shell_command": "open '/Applications/Bear.app'"
+              "shell_command": "open '/Applications/カレンダー.app'"
             }
           ],
           "type": "basic"
@@ -102,23 +102,6 @@
           "to": [
             {
               "shell_command": "open '/Applications/zoom.us.app'"
-            }
-          ],
-          "type": "basic"
-        },
-        {
-          "from": {
-            "key_code": "v",
-            "modifiers": {
-              "mandatory": [
-                "left_control",
-                "left_command"
-              ]
-            }
-          },
-          "to": [
-            {
-              "shell_command": "open '/Applications/Visual Studio Code.app'"
             }
           ],
           "type": "basic"

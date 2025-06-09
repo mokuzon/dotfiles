@@ -34,10 +34,13 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
 export FZF_DEFAULT_OPTS='--reverse'
 export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
 export VOLTA_HOME="$HOME/.volta"
+export DOCKER_HOST=unix:///var/run/docker.sock
 export PATH="$VOLTA_HOME/bin:$PATH"
-export PATH="$HOME/.jenv/bin:$PATH"
 export PATH=$GOPATH/bin:$PATH
 export PATH=/opt/brew/bin:$PATH
+export PATH=/usr/local/go/bin:$PATH
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
 
 typeset -U path PATH
 
@@ -71,6 +74,7 @@ alias ts='tig status'
 alias vim='nvim'
 alias ctags="`brew --prefix`/bin/ctags"
 alias mvim='open -a MacVim "$@"'
+alias k='kubectl'
 alias tmux-changekey='tmux set-option -ag prefix C-b'
 alias tmux-revertkey='tmux set-option -ag prefix C-t'
 
@@ -79,8 +83,8 @@ alias tmux-revertkey='tmux set-option -ag prefix C-t'
 ### tools
 ######################################################################
 eval "$(direnv hook zsh)"
-eval "$(jenv init -)"
-
+eval "$(rbenv init - zsh)"
+eval "$(pyenv init - zsh)"
 
 
 ######################################################################
@@ -164,3 +168,11 @@ ${cdir}${vcs_info_msg_0_} %F{238}[%*]%f
 %(?.%F{green}.%F{yellow})%(?.${success}.${fail})%f $ %b'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/mokuzono/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)

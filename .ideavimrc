@@ -1,6 +1,8 @@
 lan en_US.UTF-8
 set backupdir=~/.vim/tmp
 set belloff=all
+set visualbell
+set noerrorbells
 set hidden
 set mouse=a
 set modifiable
@@ -8,6 +10,7 @@ set noswapfile
 set autoread
 set foldmethod=indent
 set foldlevel=100
+set clipboard=unnamed
 
 " tab
 filetype plugin indent on

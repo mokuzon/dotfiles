@@ -85,6 +85,7 @@ railways.cache
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
 .idea/uiDesigner.xml
+.idea/kotlinc.xml
 
 # Gradle:
 .idea/gradle.xml
@@ -182,6 +183,10 @@ cscope.po.out
 Gemfile.local
 Gemfile.local.lock
 vendor/bundle
+
+
+# Java
+.sdkmanrc
 
 
 # git

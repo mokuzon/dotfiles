@@ -198,6 +198,7 @@ augroup checktime
   au!
 
 let g:openbrowser_github_always_used_branch = vimproc#system("git remote show origin | grep 'HEAD branch' | awk '{print $NF}' | awk '{printf $0}'")
+let g:openbrowser_github_always_use_commit_hash = 0
 
 let g:extra_whitespace_ignored_filetypes = ['diff', 'gitcommit', 'qf', 'help']
 
